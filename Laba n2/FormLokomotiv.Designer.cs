@@ -130,7 +130,7 @@ namespace Laba_n2
             this.Controls.Add(this.buttonCreateLokomotiv);
             this.Controls.Add(this.pictureBoxLokomotiv);
             this.Name = "FormLokomotiv";
-            this.Text = "Локомотив";
+            this.Text = "Локомотив и Монорельс";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLokomotiv)).EndInit();
             this.ResumeLayout(false);
 

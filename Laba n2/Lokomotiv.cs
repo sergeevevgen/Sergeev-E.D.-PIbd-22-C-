@@ -12,15 +12,15 @@ namespace Laba_n2
         /// <summary>
         /// Ширина отрисовки монорельса
         /// </summary>
-        private readonly int monoRelsWidth = 105;
+        private readonly int lokomotivWidth = 105;
 
         /// <summary>
         /// Высота отрисовки монорельса
         /// </summary>
-        private readonly int monoRelsHeight = 50;
+        private readonly int lokomotivHeight = 50;
 
         /// <summary>
-        /// 
+        /// Конструктор для создания локомотива
         /// </summary>
         /// <param name="maxSpeed" - максимальная скорость Локомотива></param>
         /// <param name="weight" - вес локомотива></param>
@@ -32,23 +32,36 @@ namespace Laba_n2
             MainColor = mainColor;
         }
 
-        protected Lokomotiv(int maxSpeed, int weight, Color mainColor, int monoRelsWidth, int monoRelsHeight)
+        /// <summary>
+        /// Конструктор для дочернего класса, чтобы создавать Монорельс
+        /// </summary>
+        /// <param name="maxSpeed" - максимальная скорость></param>
+        /// <param name="weight" - вес></param>
+        /// <param name="mainColor" - основной цвет></param>
+        /// <param name="lokomotivWidth" - ширина объекта></param>
+        /// <param name="lokomotivHeight" - высота объекта></param>
+        protected Lokomotiv(int maxSpeed, int weight, Color mainColor, int lokomotivWidth, int lokomotivHeight)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
-            this.monoRelsWidth = monoRelsWidth;
-            this.monoRelsHeight = monoRelsHeight;
+            this.lokomotivWidth = lokomotivWidth;
+            this.lokomotivHeight = lokomotivHeight;
         }
 
+        /// <summary>
+        /// Метод изменения направления движения
+        /// </summary>
+        /// <param name="direction" - направление></param>
         public override void MoveTransport(Direction direction)
         {
+            //один "шаг"
             int step = MaxSpeed * 100 / Weight;
             switch (direction)
             {
                 // вправо
                 case Direction.Right:
-                    if (_startPosX + step < _pictureWidth - monoRelsWidth)
+                    if (_startPosX + step < _pictureWidth - lokomotivWidth)
                     {
                         _startPosX += step;
                     }
@@ -69,7 +82,7 @@ namespace Laba_n2
                     break;
                 //вниз
                 case Direction.Down:
-                    if (_startPosY + step < _pictureHeight - monoRelsHeight)
+                    if (_startPosY + step < _pictureHeight - lokomotivHeight)
                     {
                         _startPosY += step;
                     }
@@ -77,6 +90,10 @@ namespace Laba_n2
             }
         }
 
+        /// <summary>
+        /// Отрисовка Локомотива
+        /// </summary>
+        /// <param name="g" - объект класса Graphics, в котором будет находиться мой транспорт></param>
         public override void DrawTransport(Graphics g)
         {
             //Создание карандаша и кисти для рисования
@@ -96,6 +113,7 @@ namespace Laba_n2
             g.FillPolygon(brush, points);
             g.DrawPolygon(pen, points);
 
+            //Отрисовка трансмиссии
             brush = new SolidBrush(Color.Black);
             //левая часть
             points = new Point[] { new Point(((int)_startPosX) + 3, ((int)_startPosY) + 34), new Point(((int)_startPosX) + 2, ((int)_startPosY) + 35), new Point(((int)_startPosX) + 1, ((int)_startPosY) + 36),
@@ -126,13 +144,13 @@ namespace Laba_n2
             g.FillEllipse(brush, _startPosX + 30, _startPosY + 35, 11, 11);
             g.FillEllipse(brush, _startPosX + 58, _startPosY + 35, 11, 11);
             g.FillEllipse(brush, _startPosX + 80, _startPosY + 35, 11, 11);
-
+            //Заливка колёс цветом
             g.DrawEllipse(pen, _startPosX + 8, _startPosY + 35, 11, 11);
             g.DrawEllipse(pen, _startPosX + 30, _startPosY + 35, 11, 11);
             g.DrawEllipse(pen, _startPosX + 58, _startPosY + 35, 11, 11);
             g.DrawEllipse(pen, _startPosX + 80, _startPosY + 35, 11, 11);
-
-            //Отрисовка задней части
+             
+            //Отрисовка задней части кузова
             brush = new SolidBrush(Color.Black);
             g.FillRectangle(brush, _startPosX + 97, _startPosY + 3, 5, 28);
 

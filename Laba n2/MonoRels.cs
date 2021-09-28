@@ -34,6 +34,17 @@ namespace Laba_n2
         /// </summary>
         public bool AirCooler { private set; get; }
 
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="maxSpeed" - максимальная скорость></param>
+        /// <param name="weight" - вес></param>
+        /// <param name="mainColor" - основной цвет></param>
+        /// <param name="dopColor" - дополнительный цвет></param>
+        /// <param name="lamp" - признак наличия фар></param>
+        /// <param name="airCooler" - признак наличия воздухозаборников></param>
+        /// <param name="numOfWins" - кол-во окон></param>
+        /// <param name="numOfDoors" - кол-во дверей></param>
         public MonoRels(int maxSpeed, int weight, Color mainColor, Color dopColor,
         bool lamp, bool airCooler, int numOfWins, int numOfDoors) : base(maxSpeed, weight, mainColor, 105, 50)
         {
@@ -44,14 +55,20 @@ namespace Laba_n2
             NumOfDoors = numOfDoors;
         }
 
+        /// <summary>
+        /// Отрисовка Монорельса
+        /// </summary>
+        /// <param name="g" - объект класса Graphics, в котором будет находиться мой транспорт></param>
         public override void DrawTransport(Graphics g)
         {
+            //Отрисовка основной части монорельса с помощью метода базового класса
             base.DrawTransport(g);
             
+            //Отрисовка дополнительных элементов
             //создание кисти и карандаша
             Pen pen = new Pen(Color.Black);
 
-            //Отрисовка трансмиссии
+            //Отрисовка новой трансмиссии
             Brush brush = new SolidBrush(Color.Black);
             Point[] points = new Point[] { new Point(((int)_startPosX) - 3, ((int)_startPosY) + 34),
             new Point(((int)_startPosX) + 9, ((int)_startPosY) + 46), new Point(((int)_startPosX) + 90, ((int)_startPosY) + 46),
