@@ -12,12 +12,13 @@ namespace Laba_n2
 {
     public partial class FormLokomotiv : Form
     {
+        //Создание объекта типа Интерфейса
         private ITransport lokomotiv;
         public FormLokomotiv()
         {
             InitializeComponent();
         }
-
+        //Метод, отрисовывающий всю картинку
         private void Draw()
         {
             //создать объект от класса Bitmap, которое будет представлять из
@@ -31,7 +32,7 @@ namespace Laba_n2
             //передать полученный рисунок на pictureBox
             pictureBoxLokomotiv.Image = bmp;
         }
-
+        //Метод, обрабатывающий нажатие на кнопку "Создать локомотив"
         private void buttonCreateLokomotiv_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -39,7 +40,7 @@ namespace Laba_n2
             lokomotiv.SetPosition(rnd.Next(10,100), rnd.Next(10,100), pictureBoxLokomotiv.Width, pictureBoxLokomotiv.Height);
             Draw();
         }
-
+        //Метод, обрабатывающий нажатие на кнопку "Создать монорельс"
         private void buttonCreateMonoRels_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
