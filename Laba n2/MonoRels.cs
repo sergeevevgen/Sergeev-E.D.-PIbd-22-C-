@@ -118,7 +118,6 @@ namespace Laba_n2
             }
             if (NumOfDoors >= 3)
             {
-                pen = new Pen(Color.Black);
                 g.DrawRectangle(pen, _startPosX + 68, _startPosY + 3, 8, 28);
                 g.FillRectangle(brush, _startPosX + 69, _startPosY + 4, 7, 27);
             }

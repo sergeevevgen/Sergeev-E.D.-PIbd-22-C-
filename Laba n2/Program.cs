@@ -16,7 +16,7 @@ namespace Laba_n2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLokomotiv());
+            Application.Run(new FormDepo());
         }
     }
 }
