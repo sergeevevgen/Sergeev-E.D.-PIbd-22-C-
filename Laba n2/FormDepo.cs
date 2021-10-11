@@ -18,7 +18,7 @@ namespace Laba_n2
         private readonly Depo<Lokomotiv> depo;
 
         /// <summary>
-        /// Констурктор
+        /// Конструктор
         /// </summary>
         public FormDepo()
         {
