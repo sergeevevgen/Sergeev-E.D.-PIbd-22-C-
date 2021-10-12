@@ -12,7 +12,7 @@ namespace Laba_n2
 {
     public partial class FormDepo : Form
     {
-         /// <summary>
+        /// <summary>
         /// Объект от  класса-коллекции депо
         /// </summary>
         private readonly DepoCollection depoCollection;
@@ -26,6 +26,9 @@ namespace Laba_n2
             depoCollection = new DepoCollection(pictureBoxDepo.Width, pictureBoxDepo.Height);
         }
 
+        /// <summary>
+        /// Заполнение listBoxLevels
+        /// </summary>
         private void ReloadLevels()
         {
             int index = listBoxLevels.SelectedIndex;
@@ -46,6 +49,7 @@ namespace Laba_n2
                 listBoxLevels.SelectedIndex = index;
             }
         }
+
         /// <summary>
         /// Метод отрисовки депо
         /// </summary>
@@ -60,10 +64,6 @@ namespace Laba_n2
                 pictureBoxDepo.Image = bmp;
             }
         }
-
-        
-
-       
 
         /// <summary>
         /// Обработка нажатия кнопки "Припарковать локомотив"
@@ -143,7 +143,11 @@ namespace Laba_n2
         }
 
        
-
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить депо"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddDepo_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
@@ -157,11 +161,21 @@ namespace Laba_n2
             ReloadLevels();
         }
 
+        /// <summary>
+        /// Метод обработки выбора элемента на listBoxLevels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
         }
 
+        /// <summary>
+        /// Обработка нажатия кнопки "Удалить депо" 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDeleteDepo_Click(object sender, EventArgs e)
         {
             if (listBoxLevels.SelectedIndex > -1)

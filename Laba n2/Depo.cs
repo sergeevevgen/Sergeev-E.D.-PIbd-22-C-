@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace Laba_n2
 {
+    /// <summary>
+    /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Depo<T>
         where T : class, ITransport
     {
         /// <summary>
-        /// Массив хранимых объектов
+        /// Лист хранимых объектов
         /// </summary>
         private readonly List<T> _places;
 
         /// <summary>
-        /// Максимальное кол-во мест на парковке
+        /// Максимальное кол-во мест в депо
         /// </summary>
         private readonly int _maxCount;
 
