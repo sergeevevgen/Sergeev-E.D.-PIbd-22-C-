@@ -10,8 +10,7 @@ namespace Laba_n2
 	/// Класс-коллекция депо
 	/// </summary>
 	public class DepoCollection
-	{
-
+    {
 		readonly Dictionary<string, Depo<Vehicle>> depoStages;
 
 		public List<string> Keys => depoStages.Keys.ToList();
@@ -36,16 +35,16 @@ namespace Laba_n2
 
 		public void DelDepo(string name)
 		{
-			if(depoStages.ContainsKey(name))
+			if (depoStages.ContainsKey(name))
 				depoStages.Remove(name);
 		}
 
 		public Depo<Vehicle> this[string ind]
 		{
-			
-			get 
-			{ 
-				if(depoStages.ContainsKey(ind))
+
+			get
+			{
+				if (depoStages.ContainsKey(ind))
 					return depoStages[ind];
 				return null;
 			}

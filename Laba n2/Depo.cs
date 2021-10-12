@@ -78,8 +78,10 @@ namespace Laba_n2
         /// <returns></returns>
         public static T operator -(Depo<T> d, int index)
         {
-            if(index < 0 || index >= d._maxCount)
+            if (index < 0 || index >= d._places.Count)
+            {
                 return null;
+            }
             var dopLoko = d._places[index];
             d._places.RemoveAt(index);
             return dopLoko;
