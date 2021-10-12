@@ -55,17 +55,17 @@ namespace Laba_n2
         /// <param name="d" - Депо></param>
         /// <param name="lokomotiv" - добавляемый локомотив/монорельс></param>
         /// <returns></returns>
-        public static bool operator +(Depo<T> d, T lokomotiv)
+        public static int operator +(Depo<T> d, T lokomotiv)
         {
             for (int i = 0; i < d._places.Length; ++i)
             {
                 if (d._places[i] == null)
                 {
                     d._places[i] = lokomotiv;
-                    return true;
+                    return i;
                 }
             }
-            return false;
+            return -1;
         }
 
         /// <summary>
@@ -77,7 +77,11 @@ namespace Laba_n2
         /// <returns></returns>
         public static T operator -(Depo<T> d, int index)
         {
-            if (d._places[index] != null)
+             if(index < 0 || index >= d._places.Length)
+            {
+                return null;
+            }
+            else if (d._places[index] != null)
             {
                 T dop = d._places[index];
                 d._places[index] = null;
