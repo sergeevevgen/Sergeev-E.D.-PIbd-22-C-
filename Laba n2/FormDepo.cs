@@ -49,13 +49,13 @@ namespace Laba_n2
             if(dialog.ShowDialog() == DialogResult.OK)
             {
                 var lokomotiv = new Lokomotiv(100, 1000, dialog.Color);
-                if(depo + lokomotiv)
+                if((depo + lokomotiv) != -1)
                 {
                     Draw();
                 }
                 else
                 {
-                    MessageBox.Show("Парковка переполнена");
+                    MessageBox.Show("Парковка переполнена!");
                 }
             }
         }
@@ -75,13 +75,13 @@ namespace Laba_n2
                 if (dialogDop.ShowDialog() == DialogResult.OK)
                 {
                     var lokomotiv = new MonoRels(100, 1000, dialog.Color, dialogDop.Color, true, true, rnd.Next(1,4), rnd.Next(1,4));
-                    if (depo + lokomotiv)
+                    if ((depo + lokomotiv) != -1)
                     {
                         Draw();
                     }
                     else
                     {
-                        MessageBox.Show("Парковка переполнена");
+                        MessageBox.Show("Парковка переполнена!");
                     }
                 }
             }
@@ -105,7 +105,7 @@ namespace Laba_n2
                 }
                 else
                 {
-                    MessageBox.Show("Это место не занято!");
+                    MessageBox.Show("Это место не занято или выбран номер места, не входящий в парковку!");
                 }
                 Draw();
             }
