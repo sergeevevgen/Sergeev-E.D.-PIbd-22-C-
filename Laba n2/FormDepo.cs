@@ -178,13 +178,25 @@ namespace Laba_n2
         /// <param name="e"></param>
         private void buttonDeleteDepo_Click(object sender, EventArgs e)
         {
-            if (listBoxLevels.SelectedIndex > -1)
+            //Удаляет парковку, основываясь на тексте в текстБоксе
+            /*if (listBoxLevels.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
                     "Удаление", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     depoCollection.DelDepo(textBoxNewLevelName.Text);
+                    ReloadLevels();
+                }
+            }*/
+            //Удаляет выбранную парковку
+            if (listBoxLevels.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
+                    "Удаление", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    depoCollection.DelDepo(listBoxLevels.SelectedItem.ToString());
                     ReloadLevels();
                 }
             }
