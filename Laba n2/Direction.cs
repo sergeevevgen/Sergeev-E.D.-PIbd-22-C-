@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonoRelsR
+namespace Laba_n2
 {
-    //Перечисление для указания направления движения
     public enum Direction
     {
-        //Вверх
         Up,
-        //Влево
+
         Left,
-        //Вправо
+
         Right,
-        //Вниз
+
         Down
     }
 }

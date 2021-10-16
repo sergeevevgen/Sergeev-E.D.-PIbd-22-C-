@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85323DC9-43EA-472F-A74C-29896DB67E7E}</ProjectGuid>
+    <ProjectGuid>{96D03422-A7A8-4F7D-85F2-CC8EAAFFE016}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MonoRelsR</RootNamespace>
-    <AssemblyName>MonoRelsR</AssemblyName>
+    <RootNamespace>Laba_n2</RootNamespace>
+    <AssemblyName>Laba n2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,17 +47,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
-    <Compile Include="FormMonoRels.cs">
+    <Compile Include="FormLokomotiv.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMonoRels.Designer.cs">
-      <DependentUpon>FormMonoRels.cs</DependentUpon>
+    <Compile Include="FormLokomotiv.Designer.cs">
+      <DependentUpon>FormLokomotiv.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITransport.cs" />
+    <Compile Include="Lokomotiv.cs" />
     <Compile Include="MonoRels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormMonoRels.resx">
-      <DependentUpon>FormMonoRels.cs</DependentUpon>
+    <Compile Include="Vehicle.cs" />
+    <EmbeddedResource Include="FormLokomotiv.resx">
+      <DependentUpon>FormLokomotiv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
