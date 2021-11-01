@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
+    //Класс-наследник от базового класса
     class MonoRels : Lokomotiv
     {
         /// <summary>

@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
+    //Абстрактный класс-наследник от интерфейса
     public abstract class Vehicle : ITransport
     {
         /// <summary>

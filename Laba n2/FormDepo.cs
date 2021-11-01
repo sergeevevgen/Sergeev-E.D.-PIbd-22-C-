@@ -18,7 +18,7 @@ namespace Laba_n2
         private readonly DepoCollection depoCollection;
 
         /// <summary>
-        /// Констурктор
+        /// Конструктор
         /// </summary>
         public FormDepo()
         {
