@@ -60,6 +60,15 @@ namespace Laba_n2
         }
 
         /// <summary>
+        /// Установка основного цвета
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetMainColor(Color color)
+        {
+            MainColor = color;
+        }
+
+        /// <summary>
         /// Отрисовка
         /// </summary>
         /// <param name="g" - объект класса Graphics, в котором будет находиться мой транспорт></param>

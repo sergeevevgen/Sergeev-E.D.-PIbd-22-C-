@@ -29,5 +29,11 @@ namespace Laba_n2
         /// </summary>
         /// <param name="direction" - направление (берется из перечисления Enum)></param>
         void MoveTransport(Direction direction);
+
+        /// <summary>
+        /// Смена основного цвета
+        /// </summary>
+        /// <param name="color">Цвет</param>
+        void SetMainColor(Color color);
     }
 }

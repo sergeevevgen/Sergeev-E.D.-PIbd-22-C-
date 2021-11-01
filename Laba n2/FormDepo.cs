@@ -69,62 +69,6 @@ namespace Laba_n2
         }
 
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать локомотив"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetLokomotiv_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var lokomotiv = new Lokomotiv(100, 1000, dialog.Color);
-                    if ((depoCollection[listBoxLevels.SelectedItem.ToString()] + lokomotiv) != -1)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать Монорельс"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetMonoRels_Click(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                Random rnd = new Random();
-
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var lokomotiv = new MonoRels(100, 1000, dialog.Color, dialogDop.Color, true, true, rnd.Next(1, 4), rnd.Next(1, 4));
-                        if ((depoCollection[listBoxLevels.SelectedItem.ToString()] + lokomotiv) != -1)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>
         /// <param name="sender"></param>
@@ -181,18 +125,7 @@ namespace Laba_n2
         /// <param name="e"></param>
         private void buttonDeleteDepo_Click(object sender, EventArgs e)
         {
-            //Удаляет парковку, основываясь на тексте в текстБоксе
-            /*if (listBoxLevels.SelectedIndex > -1)
-            {
-                if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
-                    "Удаление", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    depoCollection.DelDepo(textBoxNewLevelName.Text);
-                    ReloadLevels();
-                }
-            }*/
-            //Удаляет выбранную парковку
+            //Удаляет выбранную парковку в ListBoxe
             if (listBoxLevels.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
@@ -203,15 +136,40 @@ namespace Laba_n2
                     ReloadLevels();
                 }
             }
+        }
 
-            //Удаление по имени из текстБокса
-            /*if (MessageBox.Show($"Удалить парковку {textBoxNewLevelName.Text}?",
-               "Удаление", MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question) == DialogResult.Yes)
-            { 
-                depoCollection.DelDepo(textBoxNewLevelName.Text);
-                ReloadLevels();
-            }*/
+        /// <summary>
+        /// Обработка нажатия на кнопку добавить (открывается форма с выбором конфигурации объекта)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddLoko_Click(object sender, EventArgs e)
+        {
+            if (listBoxLevels.SelectedIndex > -1)
+            {
+                var formLokoConfig = new FormLokomotivConfig();
+                formLokoConfig.AddEvent(AddLoko);
+                formLokoConfig.Show();
+            }
+        }
+
+        /// <summary>
+        /// Метод добавления объекта
+        /// </summary>
+        /// <param name="loko"></param>
+        private void AddLoko(Vehicle loko)
+        {
+            if(loko != null && listBoxLevels.SelectedIndex > -1)
+            {
+                if(depoCollection[listBoxLevels.SelectedItem.ToString()] + loko != -1)
+                {
+                    Draw();
+                }
+                else 
+                {
+                    MessageBox.Show("Локомотив/Монорельс не удалось поставить(");
+                }
+            }
         }
     }
 }

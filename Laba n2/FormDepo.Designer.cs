@@ -30,8 +30,6 @@ namespace Laba_n2
         private void InitializeComponent()
         {
             this.pictureBoxDepo = new System.Windows.Forms.PictureBox();
-            this.buttonSetLokomotiv = new System.Windows.Forms.Button();
-            this.buttonSetMonoRels = new System.Windows.Forms.Button();
             this.groupBoxTake = new System.Windows.Forms.GroupBox();
             this.buttonTake = new System.Windows.Forms.Button();
             this.maskedTextBoxTake = new System.Windows.Forms.MaskedTextBox();
@@ -41,6 +39,7 @@ namespace Laba_n2
             this.listBoxLevels = new System.Windows.Forms.ListBox();
             this.buttonAddDepo = new System.Windows.Forms.Button();
             this.buttonDeleteDepo = new System.Windows.Forms.Button();
+            this.buttonAddLoko = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDepo)).BeginInit();
             this.groupBoxTake.SuspendLayout();
             this.SuspendLayout();
@@ -54,32 +53,12 @@ namespace Laba_n2
             this.pictureBoxDepo.TabIndex = 0;
             this.pictureBoxDepo.TabStop = false;
             // 
-            // buttonSetLokomotiv
-            // 
-            this.buttonSetLokomotiv.Location = new System.Drawing.Point(703, 237);
-            this.buttonSetLokomotiv.Name = "buttonSetLokomotiv";
-            this.buttonSetLokomotiv.Size = new System.Drawing.Size(108, 56);
-            this.buttonSetLokomotiv.TabIndex = 1;
-            this.buttonSetLokomotiv.Text = "Припарковать локомотив";
-            this.buttonSetLokomotiv.UseVisualStyleBackColor = true;
-            this.buttonSetLokomotiv.Click += new System.EventHandler(this.buttonSetLokomotiv_Click);
-            // 
-            // buttonSetMonoRels
-            // 
-            this.buttonSetMonoRels.Location = new System.Drawing.Point(703, 299);
-            this.buttonSetMonoRels.Name = "buttonSetMonoRels";
-            this.buttonSetMonoRels.Size = new System.Drawing.Size(108, 57);
-            this.buttonSetMonoRels.TabIndex = 2;
-            this.buttonSetMonoRels.Text = "Припарковать монорельс";
-            this.buttonSetMonoRels.UseVisualStyleBackColor = true;
-            this.buttonSetMonoRels.Click += new System.EventHandler(this.buttonSetMonoRels_Click);
-            // 
             // groupBoxTake
             // 
             this.groupBoxTake.Controls.Add(this.buttonTake);
             this.groupBoxTake.Controls.Add(this.maskedTextBoxTake);
             this.groupBoxTake.Controls.Add(this.labelNumber);
-            this.groupBoxTake.Location = new System.Drawing.Point(703, 362);
+            this.groupBoxTake.Location = new System.Drawing.Point(703, 350);
             this.groupBoxTake.Name = "groupBoxTake";
             this.groupBoxTake.Size = new System.Drawing.Size(108, 100);
             this.groupBoxTake.TabIndex = 3;
@@ -159,19 +138,28 @@ namespace Laba_n2
             this.buttonDeleteDepo.UseVisualStyleBackColor = true;
             this.buttonDeleteDepo.Click += new System.EventHandler(this.buttonDeleteDepo_Click);
             // 
+            // buttonAddLoko
+            // 
+            this.buttonAddLoko.Location = new System.Drawing.Point(691, 303);
+            this.buttonAddLoko.Name = "buttonAddLoko";
+            this.buttonAddLoko.Size = new System.Drawing.Size(120, 41);
+            this.buttonAddLoko.TabIndex = 9;
+            this.buttonAddLoko.Text = "Добавить локомотив";
+            this.buttonAddLoko.UseVisualStyleBackColor = true;
+            this.buttonAddLoko.Click += new System.EventHandler(this.buttonAddLoko_Click);
+            // 
             // FormDepo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 462);
+            this.Controls.Add(this.buttonAddLoko);
             this.Controls.Add(this.buttonDeleteDepo);
             this.Controls.Add(this.buttonAddDepo);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.labelNewDepo);
             this.Controls.Add(this.groupBoxTake);
-            this.Controls.Add(this.buttonSetMonoRels);
-            this.Controls.Add(this.buttonSetLokomotiv);
             this.Controls.Add(this.pictureBoxDepo);
             this.Name = "FormDepo";
             this.Text = "Депо";
@@ -186,8 +174,6 @@ namespace Laba_n2
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxDepo;
-        private System.Windows.Forms.Button buttonSetLokomotiv;
-        private System.Windows.Forms.Button buttonSetMonoRels;
         private System.Windows.Forms.GroupBox groupBoxTake;
         private System.Windows.Forms.Button buttonTake;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxTake;
@@ -197,5 +183,6 @@ namespace Laba_n2
         private System.Windows.Forms.ListBox listBoxLevels;
         private System.Windows.Forms.Button buttonAddDepo;
         private System.Windows.Forms.Button buttonDeleteDepo;
+        private System.Windows.Forms.Button buttonAddLoko;
     }
 }
