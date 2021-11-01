@@ -18,7 +18,7 @@ namespace Laba_n2
         private readonly DepoCollection depoCollection;
 
         /// <summary>
-        /// Констурктор
+        /// Конструктор
         /// </summary>
         public FormDepo()
         {
@@ -181,18 +181,7 @@ namespace Laba_n2
         /// <param name="e"></param>
         private void buttonDeleteDepo_Click(object sender, EventArgs e)
         {
-            //Удаляет парковку, основываясь на тексте в текстБоксе
-            /*if (listBoxLevels.SelectedIndex > -1)
-            {
-                if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
-                    "Удаление", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    depoCollection.DelDepo(textBoxNewLevelName.Text);
-                    ReloadLevels();
-                }
-            }*/
-            //Удаляет выбранную парковку
+            //Удаляет выбранную парковку по имени, которое выбрано в ListBoxe
             if (listBoxLevels.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
@@ -203,15 +192,6 @@ namespace Laba_n2
                     ReloadLevels();
                 }
             }
-
-            //Удаление по имени из текстБокса
-            /*if (MessageBox.Show($"Удалить парковку {textBoxNewLevelName.Text}?",
-               "Удаление", MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question) == DialogResult.Yes)
-            { 
-                depoCollection.DelDepo(textBoxNewLevelName.Text);
-                ReloadLevels();
-            }*/
         }
     }
 }
