@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
+    //Интерфейс транспорта
     public interface ITransport
     {
         /// <summary>

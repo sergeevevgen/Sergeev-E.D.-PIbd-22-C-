@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
+    //Класс-наследник от абстрактного класса
     class Lokomotiv : Vehicle
     {
         /// <summary>
