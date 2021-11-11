@@ -20,6 +20,11 @@ namespace Laba_n2
         private readonly int lokomotivHeight = 50;
 
         /// <summary>
+        /// Разделитель для записи информации по объекту в файл
+        /// </summary>
+        protected readonly char separator = ',';
+
+        /// <summary>
         /// Конструктор для создания локомотива
         /// </summary>
         /// <param name="maxSpeed" - максимальная скорость Локомотива></param>
@@ -47,6 +52,27 @@ namespace Laba_n2
             MainColor = mainColor;
             this.lokomotivWidth = lokomotivWidth;
             this.lokomotivHeight = lokomotivHeight;
+        }
+
+        
+        /// <summary>
+        /// Конструктор для  загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Lokomotiv(string info)
+        {
+            string[] strs = info.Split(separator);
+            if(strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
+
+        public Lokomotiv()
+        {
+
         }
 
         /// <summary>
@@ -165,6 +191,24 @@ namespace Laba_n2
             pen = new Pen(Color.Black);
             g.DrawRectangle(pen, _startPosX + 32, _startPosY + 3, 8, 28);
             g.FillRectangle(brush, _startPosX + 33, _startPosY + 4, 7, 27);
+        }
+
+
+        /// Переопределение метода ToString() для записи информации об объекте в файл
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
+        public virtual void getDataForNew(string info)
+        {
+            string[] line = info.Split(separator);
+            if(line.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(line[0]);
+                Weight = Convert.ToInt32(line[1]);
+                MainColor = Color.FromName(line[2]);
+            }
         }
     }
 }

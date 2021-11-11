@@ -136,5 +136,14 @@ namespace Laba_n2
                 (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
+
+        public T GetNext(int index)
+        {
+            if(index > -1 && index < _places.Count)
+            {
+                return _places[index];
+            }
+            return null;
+        }
     }
 }
