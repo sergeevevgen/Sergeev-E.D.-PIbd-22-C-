@@ -57,6 +57,26 @@ namespace Laba_n2
         }
 
         /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация</param>
+        public MonoRels(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if(strs.Length == 8)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                NumOfDoors = Convert.ToInt32(strs[4]);
+                NumOfWins = Convert.ToInt32(strs[5]);
+                Lamp = Convert.ToBoolean(strs[6]);
+                AirCooler = Convert.ToBoolean(strs[7]);
+            }
+        }
+
+        /// <summary>
         /// Отрисовка Монорельса
         /// </summary>
         /// <param name="g" - объект класса Graphics, в котором будет находиться мой транспорт></param>
@@ -131,6 +151,12 @@ namespace Laba_n2
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+
+        //Переопределение метода ToString() у базового класса
+        public override string ToString()
+        {
+            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{NumOfDoors}{separator}{NumOfWins}{separator}{Lamp}{separator}{AirCooler}";
         }
     }
 }

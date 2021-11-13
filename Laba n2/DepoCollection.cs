@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Laba_n2
@@ -31,6 +32,10 @@ namespace Laba_n2
 		/// </summary>
 		private readonly int pictureHeight;
 
+		/// <summary>
+        /// Разделитель для записи информации в файл
+        /// </summary>
+		private readonly char separator = ':';
 
 		/// <summary>
 		/// Конструктор
@@ -78,5 +83,97 @@ namespace Laba_n2
 				return null;
 			}
 		}
+
+		/// <summary>
+		/// Сохранение информации по локомотивам в депо в файл
+		/// </summary>
+		/// <param name="filename">Путь и имя файла</param>
+		/// <returns></returns>
+		public bool SaveData(string filename)
+        {
+			if(File.Exists(filename))
+			{
+				File.Delete(filename);
+			}
+			using (StreamWriter sw = new StreamWriter(filename))
+            {
+				//Последовательно записываем в файл строки
+				sw.WriteLine("DepoCollection");
+				foreach(var level in depoStages)
+                {
+					sw.WriteLine($"Depo{separator}{level.Key}");
+					ITransport lokomotiv = null;
+					for(int i = 0; (lokomotiv = level.Value.GetNext(i)) != null; i++)
+                    {
+						if(lokomotiv != null)
+                        {
+							if(lokomotiv.GetType().Name == "Lokomotiv")
+                            {
+								sw.Write($"Lokomotiv{separator}");
+                            }
+							if(lokomotiv.GetType().Name == "MonoRels")
+                            {
+								sw.Write($"MonoRels{separator}");
+                            }
+							sw.WriteLine(lokomotiv);
+                        }
+                    }
+                }
+            }
+			return true;
+        }
+
+		/// <summary>
+		/// Загрузка информации по локомотивам в депо из файла
+		/// </summary>
+		/// <param name="filename"></param>
+		/// <returns></returns>
+		public bool LoadData(string filename)
+        {
+			if (!File.Exists(filename))
+			{
+				return false;
+			}
+			
+			//Последовательно считывает строки
+			using (StreamReader sr = new StreamReader(filename))
+            {
+				string line = sr.ReadLine();
+				if (line.Contains("DepoCollection"))
+				{
+					depoStages.Clear();
+				}
+				else
+				{
+					return false;
+				}
+
+				string key = string.Empty;
+				Vehicle lokomotiv = null;
+				while ((line = sr.ReadLine()) != null)
+				{
+					if (line.Contains("Depo"))
+                    {
+						key = line.Split(separator)[1];
+						depoStages.Add(key, new Depo<Vehicle>(pictureWidth, pictureHeight));
+						continue;
+                    }
+					else if(line.Contains("Lokomotiv"))
+                    {
+						lokomotiv = new Lokomotiv(line.Split(separator)[1]);
+                    }
+					else if (line.Contains("MonoRels"))
+                    {
+						lokomotiv = new MonoRels(line.Split(separator)[1]);
+                    }
+					//Добавляем объект в депо, если есть свободное место
+					if((depoStages[key] + lokomotiv) == -1)
+                    {
+						return false;
+                    }
+                }
+			}
+			return true;
+        }
 	}
 }
