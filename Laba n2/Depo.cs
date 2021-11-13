@@ -137,6 +137,11 @@ namespace Laba_n2
             }
         }
 
+        /// <summary>
+        /// Функция получения элемента из списка
+        /// </summary>
+        /// <param name="index">номер элемента</param>
+        /// <returns></returns>
         public T GetNext(int index)
         {
             if(index > -1 && index < _places.Count)

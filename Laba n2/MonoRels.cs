@@ -75,11 +75,6 @@ namespace Laba_n2
             }
         }
 
-        public MonoRels()
-        {
-
-        }
-
         /// <summary>
         /// Отрисовка Монорельса
         /// </summary>
@@ -157,25 +152,10 @@ namespace Laba_n2
             DopColor = color;
         }
 
+        //Переопределение метода ToString() у базового класса
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{NumOfDoors}{separator}{NumOfWins}{separator}{Lamp}{separator}{AirCooler}";
-        }
-
-        public override void getDataForNew(string info)
-        {
-            string[] line = info.Split(separator);
-            if (line.Length == 8)
-            {
-                MaxSpeed = Convert.ToInt32(line[0]);
-                Weight = Convert.ToInt32(line[1]);
-                MainColor = Color.FromName(line[2]);
-                DopColor = Color.FromName(line[3]);
-                NumOfDoors = Convert.ToInt32(line[4]);
-                NumOfWins = Convert.ToInt32(line[5]);
-                Lamp = Convert.ToBoolean(line[6]);
-                AirCooler = Convert.ToBoolean(line[7]);
-            }
         }
     }
 }

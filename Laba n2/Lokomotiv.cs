@@ -70,11 +70,6 @@ namespace Laba_n2
             }
         }
 
-        public Lokomotiv()
-        {
-
-        }
-
         /// <summary>
         /// Метод изменения направления движения
         /// </summary>
@@ -198,17 +193,6 @@ namespace Laba_n2
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
-        }
-
-        public virtual void getDataForNew(string info)
-        {
-            string[] line = info.Split(separator);
-            if(line.Length == 3)
-            {
-                MaxSpeed = Convert.ToInt32(line[0]);
-                Weight = Convert.ToInt32(line[1]);
-                MainColor = Color.FromName(line[2]);
-            }
         }
     }
 }
