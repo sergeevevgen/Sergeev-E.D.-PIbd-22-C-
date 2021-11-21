@@ -4,15 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
 namespace Laba_n2
 {
-    public class Depo<T> where T : class, ITransport
+    /// <summary>
+    /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class Depo<T>
+        where T : class, ITransport
     {
         /// <summary>
-        /// Массив хранимых объектов
+        /// Лист хранимых объектов
         /// </summary>
-        private readonly T[] _places;
+        private readonly List<T> _places;
+
+        /// <summary>
+        /// Максимальное кол-во мест в депо
+        /// </summary>
+        private readonly int _maxCount;
 
         /// <summary>
         /// Ширина окна отрисовки депо
@@ -43,9 +52,10 @@ namespace Laba_n2
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
 
         /// <summary>
@@ -57,15 +67,10 @@ namespace Laba_n2
         /// <returns></returns>
         public static int operator +(Depo<T> d, T lokomotiv)
         {
-            for (int i = 0; i < d._places.Length; ++i)
-            {
-                if (d._places[i] == null)
-                {
-                    d._places[i] = lokomotiv;
-                    return i;
-                }
-            }
-            return -1;
+            if (d._places.Count == d._maxCount)
+                return -1;
+            d._places.Add(lokomotiv);
+            return d._places.Count - 1;
         }
 
         /// <summary>
@@ -77,17 +82,13 @@ namespace Laba_n2
         /// <returns></returns>
         public static T operator -(Depo<T> d, int index)
         {
-             if(index < 0 || index >= d._places.Length)
+            if (index < 0 || index >= d._places.Count)
             {
                 return null;
             }
-            else if (d._places[index] != null)
-            {
-                T dop = d._places[index];
-                d._places[index] = null;
-                return dop;
-            }       
-            return null;
+            var dopLoko = d._places[index];
+            d._places.RemoveAt(index);
+            return dopLoko;
         }
 
         /// <summary>
@@ -101,15 +102,15 @@ namespace Laba_n2
 
             //Отрисовка объектов
             int x = 17, y = 10;
-            for(int i = 0; i < _places.Length; ++i)
+            for(int i = 0; i < _places.Count; ++i)
             {
                 if (i % (pictureWidth / _placeSizeWidth) == 0 && i != 0)
                 {
                     y += 70;
                     x = 17;
                 }
-                _places[i]?.SetPosition(x, y, 1, 1);
-                _places[i]?.DrawTransport(g);
+                _places[i].SetPosition(x, y, 1, 1);
+                _places[i].DrawTransport(g);
                 x += 140;
             }
         }
