@@ -123,5 +123,14 @@ namespace Laba_n2
                 g.FillRectangle(brush, _startPosX + 69, _startPosY + 4, 7, 27);
             }
         }
+
+        /// <summary>
+        /// Метод для смены доп. цвета
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }
