@@ -1,4 +1,5 @@
 ﻿using System;
+using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,12 +19,18 @@ namespace Laba_n2
         private readonly DepoCollection depoCollection;
 
         /// <summary>
+        /// Логгер
+        /// </summary>
+        private readonly Logger logger;
+
+        /// <summary>
         /// Констурктор
         /// </summary>
         public FormDepo()
         {
             InitializeComponent();
             depoCollection = new DepoCollection(pictureBoxDepo.Width, pictureBoxDepo.Height);
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         /// <summary>
@@ -77,15 +84,28 @@ namespace Laba_n2
         {
             if(listBoxLevels.SelectedIndex > -1 && maskedTextBoxTake.Text != "")
             {
-                var lokomotiv = depoCollection[listBoxLevels.SelectedItem.ToString()] -
-                    Convert.ToInt32(maskedTextBoxTake.Text);
-                if(lokomotiv != null)
+                try
                 {
-                    FormLokomotiv form = new FormLokomotiv();
-                    form.SetLokomotiv(lokomotiv);
-                    form.ShowDialog();
+                    var lokomotiv = depoCollection[listBoxLevels.SelectedItem.ToString()] -
+                   Convert.ToInt32(maskedTextBoxTake.Text);
+
+                    if (lokomotiv != null)
+                    {
+                        FormLokomotiv form = new FormLokomotiv();
+                        form.SetLokomotiv(lokomotiv);
+                        form.ShowDialog();
+                        logger.Info("Изъят локомотив/монорельс " + lokomotiv + " с места " + maskedTextBoxTake.Text);
+                        Draw();
+                    }
                 }
-                Draw();
+                catch(DepoNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -103,7 +123,7 @@ namespace Laba_n2
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            logger.Info("Добавили депо " + textBoxNewLevelName.Text);
             depoCollection.AddDepo(textBoxNewLevelName.Text);
             ReloadLevels();
         }
@@ -115,6 +135,7 @@ namespace Laba_n2
         /// <param name="e"></param>
         private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info("Перешли в депо " + listBoxLevels.SelectedItem.ToString());
             Draw();
         }
 
@@ -128,10 +149,11 @@ namespace Laba_n2
             //Удаляет выбранную парковку в ListBoxe
             if (listBoxLevels.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку {listBoxLevels.SelectedItem.ToString()}?",
+                if (MessageBox.Show($"Удалить депо {listBoxLevels.SelectedItem.ToString()}?",
                     "Удаление", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info("Удалили депо " + listBoxLevels.SelectedItem.ToString());
                     depoCollection.DelDepo(listBoxLevels.SelectedItem.ToString());
                     ReloadLevels();
                 }
@@ -161,13 +183,26 @@ namespace Laba_n2
         {
             if(loko != null && listBoxLevels.SelectedIndex > -1)
             {
-                if(depoCollection[listBoxLevels.SelectedItem.ToString()] + loko != -1)
+                try
                 {
+                    if (depoCollection[listBoxLevels.SelectedItem.ToString()] + loko != -1)
+                    {
+                        Draw();
+                        logger.Info("Добавлен локомотив/монорельс " + loko);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Локомотив/Монорельс не удалось поставить(");
+                    }
                     Draw();
                 }
-                else 
+                catch (DepoOverflowException ex)
                 {
-                    MessageBox.Show("Локомотив/Монорельс не удалось поставить(");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -181,15 +216,17 @@ namespace Laba_n2
         {
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(depoCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    depoCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else 
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
                 }
             }
         }
@@ -203,17 +240,24 @@ namespace Laba_n2
         {
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if(depoCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    depoCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (DepoOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK,
+                       MessageBoxIcon.Error);
                 }
             }
         }

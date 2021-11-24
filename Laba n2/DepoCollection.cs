@@ -89,7 +89,7 @@ namespace Laba_n2
 		/// </summary>
 		/// <param name="filename">Путь и имя файла</param>
 		/// <returns></returns>
-		public bool SaveData(string filename)
+		public void SaveData(string filename)
         {
 			if(File.Exists(filename))
 			{
@@ -120,7 +120,6 @@ namespace Laba_n2
                     }
                 }
             }
-			return true;
         }
 
 		/// <summary>
@@ -128,11 +127,11 @@ namespace Laba_n2
 		/// </summary>
 		/// <param name="filename"></param>
 		/// <returns></returns>
-		public bool LoadData(string filename)
+		public void LoadData(string filename)
         {
 			if (!File.Exists(filename))
 			{
-				return false;
+				throw new FileNotFoundException();
 			}
 			
 			//Последовательно считывает строки
@@ -141,11 +140,13 @@ namespace Laba_n2
 				string line = sr.ReadLine();
 				if (line.Contains("DepoCollection"))
 				{
+					//Очищаем записи
 					depoStages.Clear();
 				}
 				else
 				{
-					return false;
+					//Если нет такой строчки, то неверный формат данных
+					throw new DataBadFormatException();
 				}
 
 				string key = string.Empty;
@@ -169,11 +170,10 @@ namespace Laba_n2
 					//Добавляем объект в депо, если есть свободное место
 					if((depoStages[key] + lokomotiv) == -1)
                     {
-						return false;
+						throw new LoadTransportException(lokomotiv);
                     }
                 }
 			}
-			return true;
         }
 	}
 }
