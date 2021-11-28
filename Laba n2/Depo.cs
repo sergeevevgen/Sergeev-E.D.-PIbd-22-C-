@@ -67,8 +67,12 @@ namespace Laba_n2
         /// <returns></returns>
         public static int operator +(Depo<T> d, T lokomotiv)
         {
-            if (d._places.Count == d._maxCount)
-                return -1;
+            if (d._places.Count >= d._maxCount)
+            {
+                //Переполнение депо
+                throw new DepoOverflowException();
+            }
+
             d._places.Add(lokomotiv);
             return d._places.Count - 1;
         }
@@ -82,10 +86,12 @@ namespace Laba_n2
         /// <returns></returns>
         public static T operator -(Depo<T> d, int index)
         {
-            if (index < 0 || index >= d._places.Count)
+            if (index < -1 || index >= d._places.Count)
             {
-                return null;
+                //Не найдено место
+                throw new DepoPlaceNotFoundException(index);
             }
+
             var dopLoko = d._places[index];
             d._places.RemoveAt(index);
             return dopLoko;
