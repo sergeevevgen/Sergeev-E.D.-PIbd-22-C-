@@ -11,7 +11,7 @@ namespace Laba_n2
     /// </summary>
     class DepoOccupiedPlaceException : Exception 
     {
-        public DepoOccupiedPlaceException():base("Место занято")
+        public DepoOccupiedPlaceException() : base("Место занято")
         { }
     }
 }

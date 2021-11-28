@@ -131,6 +131,7 @@ namespace Laba_n2
         {
 			if (!File.Exists(filename))
 			{
+				//Не найден файл!
 				throw new FileNotFoundException();
 			}
 			
@@ -170,6 +171,7 @@ namespace Laba_n2
 					//Добавляем объект в депо, если есть свободное место
 					if((depoStages[key] + lokomotiv) == -1)
                     {
+						//Ошибка загрузки транспорта
 						throw new LoadTransportException(lokomotiv);
                     }
                 }

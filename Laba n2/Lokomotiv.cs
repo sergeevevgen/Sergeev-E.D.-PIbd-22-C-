@@ -22,7 +22,7 @@ namespace Laba_n2
         /// <summary>
         /// Разделитель для записи информации по объекту в файл
         /// </summary>
-        protected readonly char separator = ',';
+        protected readonly char separator = ';';
 
         /// <summary>
         /// Конструктор для создания локомотива

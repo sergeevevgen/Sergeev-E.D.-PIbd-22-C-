@@ -98,12 +98,14 @@ namespace Laba_n2
                         Draw();
                     }
                 }
-                catch(DepoNotFoundException ex)
+                catch(DepoPlaceNotFoundException ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch(Exception ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -121,6 +123,7 @@ namespace Laba_n2
             {
                 MessageBox.Show("Введите название депо", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logger.Warn("Не введено название депо");
                 return;
             }
             logger.Info("Добавили депо " + textBoxNewLevelName.Text);
@@ -192,16 +195,19 @@ namespace Laba_n2
                     }
                     else
                     {
+                        logger.Warn("Локомотив/Монорельс не удалось поставить(");
                         MessageBox.Show("Локомотив/Монорельс не удалось поставить(");
                     }
                     Draw();
                 }
                 catch (DepoOverflowException ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -225,6 +231,7 @@ namespace Laba_n2
                 }
                 catch (Exception ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK,
                        MessageBoxIcon.Error);
                 }
@@ -251,11 +258,13 @@ namespace Laba_n2
                 }
                 catch (DepoOccupiedPlaceException ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
+                    logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK,
                        MessageBoxIcon.Error);
                 }

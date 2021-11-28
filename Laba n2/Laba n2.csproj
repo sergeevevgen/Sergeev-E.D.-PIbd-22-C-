@@ -57,7 +57,7 @@
     <Compile Include="DataBadFormatException.cs" />
     <Compile Include="Depo.cs" />
     <Compile Include="DepoCollection.cs" />
-    <Compile Include="DepoNotFoundException.cs" />
+    <Compile Include="DepoPlaceNotFoundException.cs" />
     <Compile Include="DepoOccupiedPlaceException.cs" />
     <Compile Include="DepoOverflowException.cs" />
     <Compile Include="Direction.cs" />

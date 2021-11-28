@@ -9,9 +9,9 @@ namespace Laba_n2
     /// <summary>
     /// Класс-ошибка Если не найден локомотив/монорельс по определенному месту
     /// </summary>
-    class DepoNotFoundException : Exception
+    class DepoPlaceNotFoundException : Exception
     {
-        public DepoNotFoundException(int i) : base("Не найден автомобиль по месту" + i)
+        public DepoPlaceNotFoundException(int i) : base("Не найден автомобиль по месту #" + i)
         { }
     }
 }

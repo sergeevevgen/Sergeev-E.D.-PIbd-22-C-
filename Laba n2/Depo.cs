@@ -69,6 +69,7 @@ namespace Laba_n2
         {
             if (d._places.Count >= d._maxCount)
             {
+                //Переполнение депо
                 throw new DepoOverflowException();
             }
 
@@ -87,7 +88,8 @@ namespace Laba_n2
         {
             if (index < -1 || index >= d._places.Count)
             {
-                throw new DepoNotFoundException(index);
+                //Не найдено место
+                throw new DepoPlaceNotFoundException(index);
             }
 
             var dopLoko = d._places[index];
