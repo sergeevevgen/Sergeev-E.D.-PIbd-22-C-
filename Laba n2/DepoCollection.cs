@@ -147,7 +147,7 @@ namespace Laba_n2
 				else
 				{
 					//Если нет такой строчки, то неверный формат данных
-					throw new DataBadFormatException();
+					throw new FormatException();
 				}
 
 				string key = string.Empty;
@@ -172,7 +172,7 @@ namespace Laba_n2
 					if((depoStages[key] + lokomotiv) == -1)
                     {
 						//Ошибка загрузки транспорта
-						throw new LoadTransportException(lokomotiv);
+						throw new TypeLoadException();
                     }
                 }
 			}
