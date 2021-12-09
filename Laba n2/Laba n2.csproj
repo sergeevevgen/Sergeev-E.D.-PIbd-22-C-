@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="DataBadFormatException.cs" />
     <Compile Include="Depo.cs" />
+    <Compile Include="DepoAlreadyHaveException.cs" />
     <Compile Include="DepoCollection.cs" />
     <Compile Include="DepoPlaceNotFoundException.cs" />
     <Compile Include="DepoOccupiedPlaceException.cs" />
@@ -81,6 +82,7 @@
     </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="LoadTransportException.cs" />
+    <Compile Include="LokoComparer.cs" />
     <Compile Include="Lokomotiv.cs" />
     <Compile Include="MonoRels.cs" />
     <Compile Include="Program.cs" />

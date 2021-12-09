@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Laba_n2
 {
@@ -102,21 +100,17 @@ namespace Laba_n2
 				foreach(var level in depoStages)
                 {
 					sw.WriteLine($"Depo{separator}{level.Key}");
-					ITransport lokomotiv = null;
-					for(int i = 0; (lokomotiv = level.Value.GetNext(i)) != null; i++)
+					foreach(ITransport lokomotiv in level.Value)
                     {
-						if(lokomotiv != null)
+						if(lokomotiv.GetType().Name == "Lokomotiv")
                         {
-							if(lokomotiv.GetType().Name == "Lokomotiv")
-                            {
-								sw.Write($"Lokomotiv{separator}");
-                            }
-							if(lokomotiv.GetType().Name == "MonoRels")
-                            {
-								sw.Write($"MonoRels{separator}");
-                            }
-							sw.WriteLine(lokomotiv);
+							sw.Write($"Lokomotiv{separator}");
                         }
+						if(lokomotiv.GetType().Name == "MonoRels")
+                        {
+							sw.Write($"MonoRels{separator}");
+                        }
+						sw.WriteLine(lokomotiv);
                     }
                 }
             }

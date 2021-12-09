@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
-    class MonoRels : Lokomotiv
+    class MonoRels : Lokomotiv, IEquatable<MonoRels>
     {
         /// <summary>
         /// Дополнительный цвет
@@ -156,6 +156,52 @@ namespace Laba_n2
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{NumOfDoors}{separator}{NumOfWins}{separator}{Lamp}{separator}{AirCooler}";
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса SportCar
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(MonoRels other)
+        {
+            if (other == null)
+                return false;
+            if (GetType().Name != other.GetType().Name)
+                return false;
+            if (MaxSpeed != other.MaxSpeed)
+                return false;
+            if (Weight != other.Weight)
+                return false;
+            if (MainColor != other.MainColor)
+                return false;
+            if (DopColor != other.DopColor)
+                return false;
+            if (NumOfDoors != other.NumOfDoors)
+                return false;
+            if (NumOfWins != other.NumOfWins)
+                return false;
+            if (Lamp != other.Lamp)
+                return false;
+            if (AirCooler != other.AirCooler)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (!(obj is MonoRels monoObj))
+                return false;
+            else
+                return Equals(monoObj);
         }
     }
 }

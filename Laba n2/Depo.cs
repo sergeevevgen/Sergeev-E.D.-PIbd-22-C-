@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections;
 using System.Drawing;
 namespace Laba_n2
 {
@@ -10,7 +7,7 @@ namespace Laba_n2
     /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Depo<T>
+    public class Depo<T> : IEnumerator<T>, IEnumerable<T>
         where T : class, ITransport
     {
         /// <summary>
@@ -44,6 +41,22 @@ namespace Laba_n2
         private readonly int _placeSizeHeight = 70;
 
         /// <summary>
+        /// Текущий элемент для вывода через IEnumerator (будет обращаться по своему 
+        /// индексу к ключу словаря, по которому будет возвращаться запись)
+        /// </summary>
+        private int _currentIndex;
+
+        /// <summary>
+        /// Текущий элемент
+        /// </summary>
+        public T Current => _places[_currentIndex];
+
+        /// <summary>
+        /// Текущий элемент
+        /// </summary>
+        object IEnumerator.Current => _places[_currentIndex];
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="picWidth" - ширина окна отрисовки></param>
@@ -56,6 +69,7 @@ namespace Laba_n2
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _places = new List<T>();
+            _currentIndex = -1;
         }
 
         /// <summary>
@@ -72,6 +86,10 @@ namespace Laba_n2
                 //Переполнение депо
                 throw new DepoOverflowException();
             }
+            if(d._places.Contains(lokomotiv))
+            {
+                throw new DepoAlreadyHaveException();
+            }
 
             d._places.Add(lokomotiv);
             return d._places.Count - 1;
@@ -86,15 +104,14 @@ namespace Laba_n2
         /// <returns></returns>
         public static T operator -(Depo<T> d, int index)
         {
-            if (index < -1 || index >= d._places.Count)
+            if (index > -1 && index < d._places.Count)
             {
-                //Не найдено место
-                throw new DepoPlaceNotFoundException(index);
+                var dopLoko = d._places[index];
+                d._places.RemoveAt(index);
+                return dopLoko;
             }
-
-            var dopLoko = d._places[index];
-            d._places.RemoveAt(index);
-            return dopLoko;
+            //Не найдено место
+            throw new DepoPlaceNotFoundException(index);
         }
 
         /// <summary>
@@ -155,6 +172,58 @@ namespace Laba_n2
                 return _places[index];
             }
             return null;
+        }
+
+        /// <summary>
+        /// Сортировка локомотивов в депо
+        /// </summary>
+        public void Sort() => _places.Sort((IComparer<T>)new LokoComparer());
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        /// </summary>
+        public void Dispose()
+        { }
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator для перехода к следующему элементу или к началу коллекции
+        /// </summary>
+        /// <returns></returns>
+        public bool MoveNext()
+        {
+            if (_currentIndex < _places.Count - 1)
+            {
+                _currentIndex++;
+                return true;
+            }
+            _currentIndex = -1;
+            return false;
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        /// </summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }
