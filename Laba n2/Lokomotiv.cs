@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Laba_n2
 {
-    class Lokomotiv : Vehicle
+    class Lokomotiv : Vehicle, IEquatable<Lokomotiv>
     {
         /// <summary>
         /// Ширина отрисовки монорельса
@@ -193,6 +193,42 @@ namespace Laba_n2
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса Lokomotiv
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Lokomotiv other)
+        {
+            if (other == null)
+                return false;
+            if (GetType().Name != other.GetType().Name)
+                return false;
+            if (MaxSpeed != other.MaxSpeed)
+                return false;
+            if (Weight != other.Weight)
+                return false;
+            if (MainColor != other.MainColor)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (!(obj is Lokomotiv lokoObj))
+                return false;
+            else
+                return Equals(lokoObj);
         }
     }
 }

@@ -205,6 +205,11 @@ namespace Laba_n2
                     logger.Warn(ex.Message);
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                catch (DepoAlreadyHaveException ex)
+                {
+                    logger.Warn(ex.Message);
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
                     logger.Warn(ex.Message);
@@ -268,6 +273,21 @@ namespace Laba_n2
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK,
                        MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Обработка нажатия на кнопку "Сортировать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxLevels.SelectedIndex > -1)
+            {
+                depoCollection[listBoxLevels.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }
