@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Depo.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -59,6 +60,12 @@
     <Compile Include="FormLokomotiv.Designer.cs">
       <DependentUpon>FormLokomotiv.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDepo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDepo.Designer.cs">
+      <DependentUpon>FormDepo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="Lokomotiv.cs" />
     <Compile Include="MonoRels.cs" />
@@ -67,6 +74,9 @@
     <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="FormLokomotiv.resx">
       <DependentUpon>FormLokomotiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDepo.resx">
+      <DependentUpon>FormDepo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
